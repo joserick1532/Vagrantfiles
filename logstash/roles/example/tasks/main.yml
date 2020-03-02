@@ -1,0 +1,50 @@
+# /your/project/vagrant/provisioning/roles/example/tasks/main.yml
+---
+- name: install the latest version of OPENJKD
+  yum:
+    name: java-1.8.0-openjdk-devel
+    state: latest
+
+
+- name: Obtener GPG 
+  rpm_key:
+    state: present
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+  
+- name: install the latest version of OPENJKD
+  yum:
+    name: java-1.8.0-openjdk-devel
+    state: latest
+
+- name: Touch a file, logstash.repo
+  file:
+    path: /etc/yum.repos.d/logstash.repo
+    state: touch
+    mode: u=rwx,g=rw,o=r
+     
+
+- name: add conf
+  blockinfile: 
+    state: present
+    insertafter: EOF
+    dest: /etc/yum.repos.d/logstash.repo
+    content: |
+      [logstash-7.x]
+      name=Elastic repository for 7.x packages
+      baseurl=https://artifacts.elastic.co/packages/7.x/yum
+      gpgcheck=1
+      gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+      enabled=1
+      autorefresh=1
+      type=rpm-md
+      type=rpm-md
+      
+
+- name: Install logstash
+  yum:
+    name: logstash
+    state: latest
+
+
+
+

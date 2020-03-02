@@ -1,0 +1,32 @@
+vm1:
+  hosts:
+    vm1:                    # hostname
+      ansible_host: 192.168.33.25   # ip address
+      ansible_user: challenge
+      memory: 1024                  # ram to be assigned in MB
+      ansible_ssh_private_key_file: .vagrant/machines/vm1/virtualbox/private_key
+
+vm2:
+  hosts:
+    vm2:
+      ansible_host: 192.168.33.26
+      ansible_user: challenge
+      memory: 1024
+      ansible_ssh_private_key_file: .vagrant/machines/vm2/virtualbox/private_key
+
+vm3:
+  hosts:
+    vm3:
+      ansible_host: 192.168.33.27
+      ansible_user: challenge
+      memory: 1024
+      ansible_ssh_private_key_file: .vagrant/machines/vm3/virtualbox/private_key
+
+vm4:
+  hosts:
+    vm4:
+      ansible_host: 192.168.33.28
+      ansible_user: challenge
+      memory: 1024
+      ansible_ssh_private_key_file: .vagrant/machines/vm4/virtualbox/private_key
+

@@ -1,0 +1,24 @@
+- hosts: vm1
+  become: true
+  roles:
+    - example
+
+
+- hosts: vm2
+  become: true
+  roles:
+    - example
+
+
+- hosts: vm3
+  become: true
+  roles:
+    - example
+
+
+- hosts: vm4
+  become: true
+  roles:
+    - example
+
+

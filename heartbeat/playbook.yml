@@ -1,0 +1,5 @@
+---
+
+- hosts: vm4
+  roles:
+    - role: example

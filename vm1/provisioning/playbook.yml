@@ -1,0 +1,8 @@
+---
+- hosts: challenge # or whatever you called your machine in your Vagrantfile
+  sudo: true
+  gather_facts: true
+
+  roles:
+    - example
+    # - any other roles you want

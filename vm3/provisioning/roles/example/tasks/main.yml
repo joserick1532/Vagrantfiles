@@ -1,0 +1,7 @@
+# /your/project/vagrant/provisioning/roles/example/tasks/main.yml
+---
+- name: Installing something
+  yum: pkg={{ item }} state=installed update_cache=true
+  with_items:
+    - openssh-server
+    # - any other valid package

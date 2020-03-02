@@ -1,0 +1,84 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define "vm1" do |vm1|
+    vm1.vm.hostname = "challenge"
+    vm1.vm.box = "bento/centos-7.6"
+    vm1.vm.network "private_network", ip: "198.163.33.10"
+    
+    vm1.vm.provider "virtualbox" do |vb|
+      vb.name = "vm1"
+      vb.gui = false
+      vb.memory = "1024"
+      vb.cpus = 1
+    end
+
+  # Ansible provisioner.
+    config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "vm1/playbook.yml"
+      ansible.inventory_path = "vm1/inventory"
+      ansible.sudo = true
+    end
+  end
+
+
+  config.vm.define "vm2" do |vm2|
+    vm2.vm.hostname = "challenge"
+    vm2.vm.box = "bento/centos-7.6"
+    vm2.vm.network "private_network", ip: "198.163.33.20"
+    
+    vm2.vm.provider "virtualbox" do |vb|
+      vb.name = "vm2"
+      vb.gui = false
+      vb.memory = "1024"
+    end
+
+    config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "vm2/playbook.yml"
+      ansible.inventory_path = "vm2/inventory"
+      ansible.sudo = true
+    end
+  end
+    
+  config.vm.define "vm3" do |vm3|
+    vm3.vm.hostname = "challenge"
+    vm3.vm.box = "bento/centos-7.6"
+    vm3.vm.network "private_network", ip: "198.163.33.30"
+    
+    vm3.vm.provider "virtualbox" do |vb|
+      vb.name = "vm3"
+      vb.gui = false
+      vb.memory = "1024"
+    end
+
+    config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "vm3/playbook.yml"
+      ansible.inventory_path = "vm3/inventory"
+      ansible.sudo = true
+    end
+  end
+    
+  config.vm.define "vm4" do |vm4|
+    vm4.vm.hostname = "challenge"
+    vm4.vm.box = "bento/centos-7.6"
+    vm4.vm.network "private_network", ip: "198.163.33.40"
+    
+    vm4.vm.provider "virtualbox" do |vb|
+      vb.name = "vm4"
+      vb.gui = false
+      vb.memory = "1024"
+    end
+
+    config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "vm4/playbook.yml"
+      ansible.inventory_path = "vm4/inventory"
+      ansible.sudo = true
+    end
+  end
+end
+
+ 

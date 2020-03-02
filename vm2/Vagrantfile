@@ -1,0 +1,144 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "centos/7"
+  config.ssh.insert_key = false
+
+  config.vm.provider :virtualbox do |v|
+    v.name = "challenge"
+    v.memory = 1024
+    v.cpus = 1
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    v.customize ["modifyvm", :id, "--ioapic", "on"]
+  end
+
+  config.vm.hostname = "challenge"
+  config.vm.network :private_network, ip: "10.0.0.22"
+
+  # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
+  config.vm.define :challenge do |challenge|
+  end
+
+  # Ansible provisioner.
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "provisioning/playbook.yml"
+    ansible.inventory_path = "provisioning/inventory"
+    ansible.sudo = true
+  end
+
+end
+
+
+
+************************
+
+   
+  config.vm.define "vm2" do |vm2|
+    vm2.vm.hostname = "challenge"
+    vm2.vm.box = "bento/centos-7.6"
+    vm2.vm.network "private_network", ip: "198.163.33.20"
+    
+    vm2.vm.provider "virtualbox" do |vb|
+      vb.name = "vm2"
+      vb.gui = false
+      vb.memory = "1024"
+    end
+  end
+    
+  config.vm.define "vm3" do |vm3|
+    vm3.vm.hostname = "challenge"
+    vm3.vm.box = "bento/centos-7.6"
+    vm3.vm.network "private_network", ip: "198.163.33.30"
+    
+    vm3.vm.provider "virtualbox" do |vb|
+      vb.name = "vm3"
+      vb.gui = false
+      vb.memory = "1024"
+    end
+  end
+    
+  config.vm.define "vm4" do |vm4|
+    vm4.vm.hostname = "challenge"
+    vm4.vm.box = "bento/centos-7.6"
+    vm4.vm.network "private_network", ip: "198.163.33.40"
+    
+    vm4.vm.provider "virtualbox" do |vb|
+      vb.name = "vm4"
+      vb.gui = false
+      vb.memory = "1024"
+    end
+  end
+end
+
+
+
+*********************************
+
+
+
+
+   
+  config.vm.define "vm2" do |vm2|
+    vm2.vm.hostname = "challenge"
+    vm2.vm.box = "bento/centos-7.6"
+    vm2.vm.network "private_network", ip: "198.163.33.20"
+    
+    vm2.vm.provider "virtualbox" do |vb|
+      vb.name = "vm2"
+      vb.gui = false
+      vb.memory = "1024"
+    end
+
+    config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "provisioning/playbook.yml"
+      ansible.inventory_path = "provisioning/inventory"
+      ansible.sudo = true
+    end
+  end
+    
+  config.vm.define "vm3" do |vm3|
+    vm3.vm.hostname = "challenge"
+    vm3.vm.box = "bento/centos-7.6"
+    vm3.vm.network "private_network", ip: "198.163.33.30"
+    
+    vm3.vm.provider "virtualbox" do |vb|
+      vb.name = "vm3"
+      vb.gui = false
+      vb.memory = "1024"
+    end
+
+    config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "provisioning/playbook.yml"
+      ansible.inventory_path = "provisioning/inventory"
+      ansible.sudo = true
+    end
+  end
+    
+  config.vm.define "vm4" do |vm4|
+    vm4.vm.hostname = "challenge"
+    vm4.vm.box = "bento/centos-7.6"
+    vm4.vm.network "private_network", ip: "198.163.33.40"
+    
+    vm4.vm.provider "virtualbox" do |vb|
+      vb.name = "vm4"
+      vb.gui = false
+      vb.memory = "1024"
+    end
+
+    config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "provisioning/playbook.yml"
+      ansible.inventory_path = "provisioning/inventory"
+      ansible.sudo = true
+    end
+  end
+end
+
+
+
+
+
+
+
